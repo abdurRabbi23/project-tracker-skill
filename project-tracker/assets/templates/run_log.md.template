@@ -1,0 +1,20 @@
+# {{PROJECT_NAME}} — Run Log
+
+Dated, chronological, append-only. One entry per session. Terse and past tense — reasoning
+and deep state belong in the matching `logbook/NN_*.md` file, not here.
+
+## Session-start checklist
+{{SESSION_START_CHECKLIST}}
+<!-- e.g. environment to activate, servers to start, anything easy to forget at the top of a session -->
+
+## Day 1 — {{FIRST_ENTRY_TITLE}}
+- {{FIRST_ENTRY_DETAIL}}
+
+<!--
+Add new entries below, oldest to newest. Keep each line short — a reader should be able to
+scan the whole file to reconstruct the project's history in a couple of minutes. Example:
+
+## Day 12 — Fixed the export bug
+- Found: exported CSV dropped the last row when totals > 1000 (off-by-one in the pagination loop).
+- Fixed in `export.py`, added a regression test. See `logbook/03_exports.md` for the full trace.
+-->

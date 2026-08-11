@@ -1,0 +1,57 @@
+# {{PROJECT_NAME}} — INDEX (read this first)
+
+Front door for {{PROJECT_NAME}}. Any new chat on this project should start here.
+
+## How work is tracked across chats
+Each chat is a separate session, but they all share these files as memory. To start a new
+chat with full context: read this file, then `logbook/HANDOFF.md`.
+
+Two layers of memory:
+- **`run_log.md`** — the dated timeline (what happened, in order, chronological).
+- **`logbook/NN_*.md`** — one file per work-stream (deep context: goals, decisions, files,
+  next steps). Use these for "how / why did we do X."
+
+Rule of thumb: work happens in a module → update that module file + add a dated line to
+`run_log.md`. If the immediate next action changes, overwrite `logbook/HANDOFF.md`.
+
+## Project one-liner
+{{PROJECT_ONE_LINER}}
+
+## Current status (updated {{DATE}})
+{{CURRENT_STATUS_PARAGRAPH}}
+
+## Modules
+| File | Work-stream | Status |
+|---|---|---|
+| `01_{{MODULE_1_SLUG}}.md` | {{MODULE_1_NAME}} | {{MODULE_1_STATUS}} |
+| `02_{{MODULE_2_SLUG}}.md` | {{MODULE_2_NAME}} | {{MODULE_2_STATUS}} |
+
+<!-- Add one row per module. Status icons: ✅ done · ▶ active, start here · ◻ planned/reference · ⏳ blocked/later -->
+
+## Mandatory rules
+See `CLAUDE.md` — rules there apply to every session on this project, no exceptions unless
+stated otherwise there.
+
+## Where things live
+| Folder | Purpose | Canonical? |
+|---|---|---|
+| `{{FOLDER_1}}/` | {{FOLDER_1_PURPOSE}} | {{FOLDER_1_CANONICAL}} |
+| `{{FOLDER_2}}/` | {{FOLDER_2_PURPOSE}} | {{FOLDER_2_CANONICAL}} |
+
+<!--
+Add one row per top-level folder. "Canonical?" is only meaningful for folders that hold
+generated output that changes over time (results, exports, runs) — mark exactly one such
+folder "Yes — current truth" and mark any quarantine folders "No — superseded/excluded, see
+its README". For folders that aren't about generated output (source code, assets, raw
+uploads), leave this column blank or "n/a" rather than forcing an answer.
+
+Example:
+| `data/final/` | The only data used in any report or analysis | Yes — current truth |
+| `data/withdrawn/` | Runs invalidated by a measurement bug, kept for the record | No — see data/withdrawn/README.md |
+| `src/` | Application source code | n/a |
+-->
+
+## Key pointers
+{{KEY_POINTERS}}
+<!-- Anything not covered by the folder map above — e.g. a deep technical reference doc, an
+external link, a build/run command. -->

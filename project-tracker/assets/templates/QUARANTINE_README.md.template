@@ -1,0 +1,19 @@
+# Why this folder is excluded
+
+**What's here:** {{WHAT_IS_HERE}}
+<!-- e.g. "3 experiment runs (seeds 2, 5, 7), trained and evaluated normally." -->
+
+**Why it's excluded / not canonical:** {{REASON}}
+<!-- Be specific enough that someone with zero memory of the incident understands it without
+asking. e.g. "A logging bug (fixed in commit abc123) caused these runs to record cost metrics
+from the wrong episode, making the safety numbers unusable. The runs themselves are not
+'wrong' in any other way — only the cost column is bad." -->
+
+**When this was decided:** {{DATE}}, see `run_log.md` {{RUN_LOG_REF}} for the full story.
+
+**Never use this data for:** {{DO_NOT_USE_FOR}}
+<!-- e.g. "Any figure, table, or claim in the final report. If you're tempted to use one
+number from here because the rest of the folder looks fine, don't — the whole folder is
+out of scope." -->
+
+**Canonical replacement, if any:** {{REPLACEMENT_LOCATION}}

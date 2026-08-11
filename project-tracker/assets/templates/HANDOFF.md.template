@@ -1,0 +1,31 @@
+# HANDOFF — paste this into a new chat's first message
+
+**Project:** {{PROJECT_NAME}}
+**Last updated:** {{DATE}}
+
+This file is overwritten, not appended to. If you're reading this because it's stale (the
+next action is already done, or doesn't match `run_log.md`), fix it now rather than leaving
+it for later.
+
+## Current status
+{{ONE_PARAGRAPH_STATUS}}
+<!-- e.g. "Backend API and DB schema are done. Frontend recipe-list view is in progress,
+about half the screens built." -->
+
+## Immediate next action
+{{NEXT_ACTION}}
+<!-- One concrete action, specific enough to start on immediately — not "keep working on
+the frontend" but "build the recipe-detail screen, reusing the card component from the list
+view." -->
+
+## Settled decisions (don't re-litigate these)
+- {{DECISION_1}}
+- {{DECISION_2}}
+<!-- Decisions that would otherwise get re-debated in a fresh chat with no memory of why they
+were made. e.g. "Using SQLite, not Postgres — this is a single-user local app, no need for a
+server." -->
+
+## Read next
+`logbook/00_INDEX.md` → `logbook/{{ACTIVE_MODULE_FILE}}`
+<!-- {{ACTIVE_MODULE_FILE}} is the module file for whatever the immediate next action above
+belongs to, e.g. "02_frontend.md". -->

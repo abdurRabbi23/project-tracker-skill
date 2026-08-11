@@ -1,0 +1,25 @@
+# Module {{NN}} — {{MODULE_NAME}}
+
+Status: {{STATUS_ICON}} {{STATUS_LABEL}}
+Last updated: {{DATE}}
+
+## Goal
+{{GOAL}}
+<!-- What this work-stream is trying to accomplish, in one or two sentences. -->
+
+## Current state
+{{CURRENT_STATE}}
+<!-- The actual state of things right now — what's built/decided/done, what isn't. Write
+enough that someone with zero memory of this project could pick up the thread from here. -->
+
+## Decisions
+{{DECISIONS}}
+<!-- Choices made and why, especially ones that would otherwise get re-debated later.
+e.g. "Chose X over Y because Z — see run_log.md Day N for the failed attempt at Y." -->
+
+## Next steps
+{{NEXT_STEPS}}
+
+## run_log.md refs
+{{RUN_LOG_REFS}}
+<!-- e.g. "Day 4: module started. Day 9: decision to switch approach. Day 12: shipped." -->

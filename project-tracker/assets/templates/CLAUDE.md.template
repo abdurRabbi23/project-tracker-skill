@@ -1,0 +1,43 @@
+# {{PROJECT_NAME}} — Project Instructions
+
+{{PROJECT_DESCRIPTION}}
+
+This folder contains everything about {{PROJECT_NAME}}. Work through this folder; save every
+important file and decision here rather than letting it live only in chat history.
+
+## Start here (for any new chat)
+Read `logbook/00_INDEX.md` first, then `logbook/HANDOFF.md`.
+
+Tracking convention:
+- `run_log.md` = the dated timeline (add a line whenever something happens).
+- `logbook/NN_*.md` = per-module deep context (goals, decisions, files, next steps).
+- When work happens in a module: update that module file AND add a line to `run_log.md`.
+  If the immediate next action changes, overwrite `logbook/HANDOFF.md` (don't append).
+- See `logbook/00_INDEX.md` → "Where things live" for the file map, and, if this project
+  generates output over time, which folder is canonical.
+
+## Mandatory rules — no exceptions
+{{MANDATORY_RULES}}
+<!--
+State each rule as: what it requires, when it applies, and how to check it was followed
+(a grep, a checklist, a specific file to re-read). A rule with no way to verify it tends to
+get skipped under deadline pressure. Examples:
+
+- Every exported report must be reviewed against the source data before sending — no
+  exceptions, even for "quick" requests. Check: the reviewer diffs totals against the raw
+  query output and notes the diff in the export's changelog entry.
+
+- (Source-of-truth lock, if this project regenerates data) Only {{CANONICAL_FOLDER}} is valid
+  for any report, figure, or claim. Never read from a quarantine folder directly, even for
+  "just checking one number" — if something there looks needed, that's a sign the canonical
+  folder is missing it, not that the quarantine folder is safe to use.
+-->
+
+## Working principles
+{{WORKING_PRINCIPLES}}
+<!--
+Optional but recommended — how you want Claude to operate day to day on this project
+(e.g. state assumptions instead of guessing, minimum viable change over speculative
+features, ask before large restructuring, verify against a stated goal before calling
+something done).
+-->
