@@ -87,7 +87,7 @@ files. All you need is one of the following:
 
 Personal skill (available in every project):
 ```bash
-git clone https://github.com/<your-username>/project-tracker-skill.git
+git clone https://github.com/abdurRabbi23/project-tracker-skill.git
 mkdir -p ~/.claude/skills
 cp -r project-tracker-skill/project-tracker ~/.claude/skills/project-tracker
 ```

@@ -1,3 +1,7 @@
 .DS_Store
 __pycache__/
 *.pyc
+
+# Local-only working files, not part of the published skill
+githubss.png
+linkedin_announcement.md

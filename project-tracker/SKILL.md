@@ -41,7 +41,7 @@ actually needs.
 ## File management
 
 Notes alone aren't enough if the files themselves are disorganized or ambiguous — a logbook
-that says "results are in the results folder" is useless if there are three folders that could
+that says "results are in the results folder" is useless if there are three folders it could
 mean, or if last month's superseded run is sitting next to this month's in the same directory
 with no way to tell them apart. Two conventions handle this:
 
@@ -71,8 +71,14 @@ over time can skip it. Ask during bootstrap rather than assuming.
 
 Trigger: the user wants tracking set up for a project that doesn't have it yet.
 
-1. Check whether `logbook/` and `run_log.md` already exist in the target folder. If they do,
+1. Check whether `logbook/` or `run_log.md` already exist in the target folder. If they do,
    stop and tell the user — don't overwrite existing history. Offer the audit mode instead.
+   Check for `CLAUDE.md` separately: an existing one is common and is NOT a reason to stop,
+   but it must never be overwritten — it may hold instructions the user depends on. Merge the
+   tracking-convention and mandatory-rules sections into what's already there, preserving
+   every existing line, and show the user the merged result rather than replacing the file
+   silently. The same caution applies to any other file the scaffold would land on: read it
+   first, merge rather than clobber, and if a clean merge isn't obvious, ask.
 2. If the target folder already has files or subfolders in it (the common case — most projects
    aren't bootstrapped into an empty folder), list the actual directory contents before
    interviewing. Use that listing to propose a first draft of the file map and to flag
@@ -102,7 +108,8 @@ Trigger: the user wants tracking set up for a project that doesn't have it yet.
    - `00_INDEX.md.template` → `logbook/00_INDEX.md`
    - `run_log.md.template` → `run_log.md`
    - `HANDOFF.md.template` → `logbook/HANDOFF.md`
-   - `CLAUDE.md.template` → `CLAUDE.md`
+   - `CLAUDE.md.template` → `CLAUDE.md` (merge into an existing one rather than replacing it,
+     per step 1)
    - `module.md.template` → `logbook/NN_topic.md`, one copy per module agreed in the interview
    - `QUARANTINE_README.md.template` → `README.md` **inside each quarantine folder** — the
      output file must be named `README.md`, not the template's own filename, since every
@@ -183,6 +190,10 @@ at which version is correct.
 - `run_log.md` entries are terse and past tense. If an entry is starting to explain *why* a
   decision was made, that reasoning belongs in the module file — link to it instead of
   expanding the log entry.
+- Entry headings can be calendar dates (`## 2026-08-12 — ...`) or working-day counters
+  (`## Day 12 — ...`); day counters read well for a project with a deadline, dates for one
+  worked on irregularly. Either is fine, but pick one at bootstrap and don't mix them — module
+  files cross-reference these headings, and mixed formats break that lookup.
 - `HANDOFF.md` stays short enough to paste whole into a new chat's opening message. If it's
   grown past a few paragraphs, move settled background into the relevant module file and leave
   only what's still live.
