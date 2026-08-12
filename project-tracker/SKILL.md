@@ -1,6 +1,6 @@
 ---
 name: project-tracker
-description: Sets up and maintains a lightweight, modular project-memory system (dated run_log.md, per-module logbook/NN_topic.md files, an always-current logbook/HANDOFF.md, and a CLAUDE.md rules file) for any long-running project worked on across many separate chats — thesis, codebase, research, business, or personal project. Use whenever the user wants to start tracking a new project, scaffold a logbook/run-log structure, record or log today's/this session's work, catch up on a project's status before continuing in a new chat, hand off context to a future session, or audit an existing tracking system for staleness or drift. Trigger on "set up tracking", "create a logbook", "log what we did today", "update the run log", "catch me up on this project", "onboard a new chat", or "check if my logbook is up to date" — even without those exact words, if the user is asking to record progress or restore context on a multi-session project.
+description: Sets up and maintains a modular project-memory system (dated run_log.md, per-module logbook/NN_topic.md files, a DECISIONS.md index, an always-current HANDOFF.md, and a CLAUDE.md rules file) for any long-running project worked on across many separate chats — thesis, codebase, research, business, or personal. Use whenever the user wants to start tracking a project, scaffold a logbook/run-log structure, log today's or this session's work, catch up on a project's status in a new chat, pick a stalled project back up after weeks away, look up when and why a past decision was made, hand off context to a future session, or audit tracking for staleness and drift. Trigger on "set up tracking", "create a logbook", "log what we did today", "update the run log", "catch me up on this project", "where did I leave off", "why did we decide X", or "check if my logbook is up to date" — even without those exact words, if the user is asking to record progress or restore context on a multi-session project.
 ---
 
 # Project Tracker
@@ -24,6 +24,11 @@ survive a new chat). It's a small number of files, each with one job, kept hones
   This is where reasoning and decisions live.
 - **`logbook/00_INDEX.md`** — the front door. One-line project description, current status,
   a table of modules with status, links to everything else. Read this first, always.
+- **`logbook/DECISIONS.md`** — a one-line-per-decision index of settled calls: when, what, why,
+  and where the full reasoning lives. As `run_log.md` grows into the thousands of lines,
+  "when did we decide X, and why?" stops being answerable by scrolling. This file keeps it a
+  lookup instead of an excavation. Only decisions expensive to re-litigate go here — routine
+  choices would drown it.
 - **`logbook/HANDOFF.md`** — the one file that gets *overwritten*, never appended to. Current
   status + the immediate next action + settled decisions, short enough to paste into a fresh
   chat's first message. A stale handoff is worse than no handoff, so it must be rewritten the
@@ -108,6 +113,9 @@ Trigger: the user wants tracking set up for a project that doesn't have it yet.
    - `00_INDEX.md.template` → `logbook/00_INDEX.md`
    - `run_log.md.template` → `run_log.md`
    - `HANDOFF.md.template` → `logbook/HANDOFF.md`
+   - `DECISIONS.md.template` → `logbook/DECISIONS.md` — if the project has existing history,
+     backfill the decisions the user already mentioned during the interview rather than
+     leaving the table empty
    - `CLAUDE.md.template` → `CLAUDE.md` (merge into an existing one rather than replacing it,
      per step 1)
    - `module.md.template` → `logbook/NN_topic.md`, one copy per module agreed in the interview
@@ -131,7 +139,38 @@ caught up before doing anything else.
 4. Confirm the next action is still right before acting on it. Things may have changed outside
    this chat since the handoff was last written.
 
-### 3. Daily / session record-keeping
+If the gap since the last entry is long (weeks or more), don't use this mode — the handoff is
+probably describing a world that no longer exists. Use the resume mode below instead.
+
+### 3. Resume a stalled project
+
+Trigger: coming back to a project after a long gap — weeks, a semester, "I forgot where I was
+with this." The distinguishing feature is that the tracking files themselves are no longer
+trustworthy: work may have happened outside the tracker, plans may have changed, and the
+handoff's "immediate next action" may be months stale or already done.
+
+The mistake to avoid is treating the handoff as current and confidently starting on an action
+the user abandoned long ago. Reconstruct from evidence first, then repair the tracker, then
+work.
+
+1. Read `logbook/00_INDEX.md`, `logbook/HANDOFF.md`, `logbook/DECISIONS.md`, and the last
+   several `run_log.md` entries. Treat the handoff as *last known intent*, not as fact.
+2. Gather independent evidence of what actually happened, rather than trusting the notes:
+   - File modification times — what changed after the last log entry's date?
+   - If the project is a git repository, `git log` since that date, and any uncommitted or
+     stashed work sitting in the tree.
+   - Whether files the handoff expected to exist actually do.
+3. Compare intent against evidence and classify the stated next action: already done, partly
+   done, overtaken by different work, or genuinely still pending.
+4. Present the reconstruction to the user plainly — here's where the tracker thinks you were,
+   here's what the files suggest actually happened, here's the gap. Then ask what changed
+   outside the tracker, since some of it will exist only in their memory.
+5. Repair before proceeding: backfill `run_log.md` with what the evidence shows happened,
+   update affected module files, add any decisions made in the interim to `DECISIONS.md`, and
+   rewrite `HANDOFF.md` to reflect where things genuinely stand now.
+6. Only then agree on the next action and start work.
+
+### 4. Daily / session record-keeping
 
 Trigger: the user asks to log or record today's/this session's work, or asks for tracking to
 be updated after finishing a task.
@@ -144,22 +183,27 @@ be updated after finishing a task.
 3. Update the matching `logbook/NN_*.md` file's current-state and next-steps sections. This is
    the deep-context layer — write enough that someone with zero memory of the session could
    pick up the thread.
-4. If the immediate next action changed, overwrite `logbook/HANDOFF.md` — don't append to it or
+4. If a decision was settled this session that would be expensive to re-litigate — a tool or
+   method chosen over an alternative, a scope boundary drawn, an approach tried and abandoned —
+   add one row to `logbook/DECISIONS.md`. Judgement matters more than completeness here: an
+   index padded with routine choices stops being scannable, which defeats the point. If you're
+   unsure whether something qualifies, ask rather than filling it in speculatively.
+5. If the immediate next action changed, overwrite `logbook/HANDOFF.md` — don't append to it or
    leave the old action sitting alongside the new one.
-5. Update `logbook/00_INDEX.md`'s module status table if a module's status changed (e.g. moved
+6. Update `logbook/00_INDEX.md`'s module status table if a module's status changed (e.g. moved
    from active to done).
-6. If new files or folders were created, or a folder's role changed, update the file map in
+7. If new files or folders were created, or a folder's role changed, update the file map in
    `00_INDEX.md` in the same pass — a file map that isn't kept current is worse than none,
    because it's actively misleading.
-7. If the project uses the source-of-truth/quarantine convention and something generated this
+8. If the project uses the source-of-truth/quarantine convention and something generated this
    session supersedes or invalidates earlier output, move the old material into its quarantine
    folder with a `README.md` explaining why — don't leave both versions sitting in the
    canonical folder together.
-8. If a mandatory rule in `CLAUDE.md` applies to the work just done, verify it was actually
+9. If a mandatory rule in `CLAUDE.md` applies to the work just done, verify it was actually
    followed before considering the log entry complete — a rule that's written down but not
    checked is decoration, not a rule.
 
-### 4. Consistency audit
+### 5. Consistency audit
 
 Trigger: the user asks to check, audit, or clean up the tracking system.
 
@@ -170,6 +214,9 @@ Check for and report:
 - Module files that haven't been touched despite `run_log.md` entries that clearly reference
   work in them.
 - Broken relative file references (a pointer to a file that no longer exists or moved).
+- Decisions recorded in module files or `run_log.md` that never made it into
+  `DECISIONS.md` — and rows in `DECISIONS.md` whose "Detail" column points somewhere that no
+  longer covers them.
 - The file map in `00_INDEX.md` not matching the folders that actually exist (missing new
   ones, describing deleted or renamed ones).
 - For projects using the source-of-truth/quarantine convention: more than one folder implicitly
@@ -206,6 +253,7 @@ at which version is correct.
 - `assets/templates/00_INDEX.md.template`
 - `assets/templates/run_log.md.template`
 - `assets/templates/HANDOFF.md.template`
+- `assets/templates/DECISIONS.md.template`
 - `assets/templates/CLAUDE.md.template`
 - `assets/templates/module.md.template`
 - `assets/templates/QUARANTINE_README.md.template` — for any folder holding superseded,

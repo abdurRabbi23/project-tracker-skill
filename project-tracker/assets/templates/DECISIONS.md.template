@@ -1,0 +1,28 @@
+# {{PROJECT_NAME}} — Decision Index
+
+One line per settled decision, newest at the bottom. This is an **index, not a record** — the
+full reasoning stays in the module file or run-log entry linked in the last column. The job of
+this file is to answer "when and why did we decide X?" in seconds, without scrolling a run log
+that's grown to thousands of lines.
+
+Only index decisions that would be **expensive to re-litigate or that constrain future work** —
+a choice between two libraries, a scope boundary, a method that was tried and abandoned, a
+standard everything else now depends on. Routine choices don't belong here; if every small call
+gets a row, the file stops being scannable and stops being used.
+
+| When | Decision | Why | Detail |
+|---|---|---|---|
+| {{WHEN_1}} | {{DECISION_1}} | {{WHY_1}} | {{DETAIL_REF_1}} |
+| {{WHEN_2}} | {{DECISION_2}} | {{WHY_2}} | {{DETAIL_REF_2}} |
+
+<!--
+"When" matches the heading format used in run_log.md (either a date or a Day counter — whichever
+this project picked at bootstrap; don't mix them).
+"Why" is one line, the reason that would otherwise be forgotten. Not a summary of the decision.
+"Detail" points at where the full reasoning lives, e.g. `logbook/03_backend.md` or `run_log.md Day 12`.
+
+Example:
+| Day 12 | SQLite, not Postgres | Single-user local app; a server is operational overhead with no benefit here | `logbook/01_backend.md` |
+| Day 19 | Dropped the offline-sync feature | Two weeks of work for a case only one user asked about; revisit if it comes up again | `run_log.md` Day 19 |
+| 2026-08-02 | Results locked to `data/final/` only | Earlier runs had a measurement bug; mixing them silently corrupted two figures | `data/withdrawn/README.md` |
+-->

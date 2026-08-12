@@ -11,6 +11,9 @@ Two layers of memory:
 - **`logbook/NN_*.md`** — one file per work-stream (deep context: goals, decisions, files,
   next steps). Use these for "how / why did we do X."
 
+Plus a shortcut: **`logbook/DECISIONS.md`** — a one-line index of settled decisions, for when
+you need "when and why did we decide X?" without scrolling the whole run log.
+
 Rule of thumb: work happens in a module → update that module file + add a dated line to
 `run_log.md`. If the immediate next action changes, overwrite `logbook/HANDOFF.md`.
 

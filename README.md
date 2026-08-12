@@ -17,6 +17,9 @@ honestly up to date:
   decisions, current state, next steps.
 - **`logbook/00_INDEX.md`** — the front door: one-line project description, current status, a
   module table, and a file map of where things live on disk.
+- **`logbook/DECISIONS.md`** — a one-line-per-decision index: when, what, why, and where the
+  full reasoning lives. Answers "why did we decide X?" without scrolling a run log that's grown
+  to thousands of lines.
 - **`logbook/HANDOFF.md`** — always overwritten, never appended to. The current status and the
   immediate next action, short enough to paste into a new chat's first message.
 - **`CLAUDE.md`** — mandatory project rules that apply to every session, no exceptions.
@@ -36,6 +39,12 @@ Once installed, ask Claude (in a chat, in Cowork, or in Claude Code) to:
   and scaffolds the full file structure.
 - **Catch you up at the start of a new chat** — Claude reads the index and handoff note and
   summarizes current status and the next action before doing anything else.
+- **Resume a stalled project** — coming back after weeks away, the notes can't be trusted.
+  Claude reconstructs what actually happened from file timestamps and git history, compares it
+  against what the tracker claims, shows you the gap, and repairs the tracking files before
+  starting any new work.
+- **Answer "why did we decide that?"** — a decision index keeps settled calls searchable
+  instead of buried in the timeline.
 - **Log today's/this session's work** — Claude updates `run_log.md`, the relevant module file,
   the handoff note, and the file map, all in the same pass.
 - **Audit the tracking system** — Claude checks for drift: a stale handoff, a module status
@@ -54,6 +63,7 @@ project-tracker/                          the skill itself — this is what you 
     ├── 00_INDEX.md.template
     ├── run_log.md.template
     ├── HANDOFF.md.template
+    ├── DECISIONS.md.template
     ├── CLAUDE.md.template
     ├── module.md.template
     └── QUARANTINE_README.md.template
@@ -114,6 +124,8 @@ Once installed and toggled on, just ask for what you want — you don't need to 
 - *"Set up tracking for this project"*
 - *"Log what we did today"*
 - *"Catch me up on this project"*
+- *"I haven't touched this in two months — where did I leave off?"*
+- *"Why did we decide to drop the caching layer?"*
 - *"Check if my logbook is up to date"*
 
 ## License
